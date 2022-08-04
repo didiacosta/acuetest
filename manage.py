@@ -14,7 +14,15 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
-    execute_from_command_line(sys.argv)
+    arguments = []
+
+    if sys.argv:
+        for arg in sys.argv:
+            if arg == 'prod':
+                os.environ.setdefault('env', '.prod.env')
+            else:
+                arguments.append(arg) 
+    execute_from_command_line(arguments)
 
 
 if __name__ == '__main__':
