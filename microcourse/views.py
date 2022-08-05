@@ -4,7 +4,7 @@ from rest_framework import viewsets, status
 from django.conf import settings
 from rest_framework.decorators import action
 import json
-
+import requests
 # Create your views here.
 class MicrocourseViewSet(viewsets.ModelViewSet):
 	

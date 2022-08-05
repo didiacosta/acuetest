@@ -26,6 +26,7 @@ router.register(r'microcourse', MicrocourseViewSet, basename='microcourse')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('app/', include('appuser.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
 ]

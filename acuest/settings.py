@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'microcourse',
+    'appuser',
     'rest_framework',
 ]
 
@@ -143,6 +144,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+LOGIN_URL = '/appuser/login/'
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
