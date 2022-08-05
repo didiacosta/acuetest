@@ -9,16 +9,48 @@
         <div data-bind="html: mensaje"></div>
         <div class="card-body">
             <div data-bind="visible:(listado()!=null && listado().length > 0)">
+                <div style="padding-bottom: 20px;text-align:right" data-bind="click: function(){$root.showModal();}">
+                    <a href="#" class="btn btn-primary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-flag"></i>
+                        </span>
+                        <span class="text">Send email report</span>
+                    </a>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Course code</th>
-                                <th>Workflow state</th>
-                                <th>start date</th>
-                                <th>end date</th>
+                                <th>
+                                    ID 
+                                    <i class="fas fa-arrow-up order" id="id-up" name="id-up" data-bind="click: function(){ $root.getData('id','1','id-up') }" style="cursor: pointer;"></i> 
+                                    <i class="fas fa-arrow-down order" id="id-down" name="id-down" data-bind="click: function(){ $root.getData('id','','id-down') }" style="cursor: pointer;"></i>
+                                </th>
+                                <th>
+                                    Name
+                                    <i class="fas fa-arrow-up order" id="name-up" name="name-up" data-bind="click: function(){ $root.getData('name','1','name-up') }" style="cursor: pointer;"></i> 
+                                    <i class="fas fa-arrow-down order" id="name-down" name="id-down" data-bind="click: function(){ $root.getData('name','','name-down') }" style="cursor: pointer;"></i>
+                                </th>
+                                <th>
+                                    Course code
+                                    <i class="fas fa-arrow-up order" id="course_code-up" name="course_code-up" data-bind="click: function(){ $root.getData('course_code','1','course_code-up') }" style="cursor: pointer;"></i> 
+                                    <i class="fas fa-arrow-down order" id="course_code-down" name="course_code-down" data-bind="click: function(){ $root.getData('course_code','','course_code-down') }" style="cursor: pointer;"></i>
+                                </th>
+                                <th>
+                                    Workflow state
+                                    <i class="fas fa-arrow-up order" id="workflow_state-up" name="workflow_state-up" data-bind="click: function(){ $root.getData('workflow_state','1','workflow_state-up') }" style="cursor: pointer;"></i> 
+                                    <i class="fas fa-arrow-down order" id="workflow_state-down" name="workflow_state-down" data-bind="click: function(){ $root.getData('workflow_state','','workflow_state-down') }" style="cursor: pointer;"></i>
+                                </th>
+                                <th>
+                                    start date
+                                    <i class="fas fa-arrow-up order" id="start_at-up" name="start_at-up" data-bind="click: function(){ $root.getData('start_at','1','start_at-up') }" style="cursor: pointer;"></i> 
+                                    <i class="fas fa-arrow-down order" id="start_at-down" name="start_at-down" data-bind="click: function(){ $root.getData('start_at','','start_at-down') }" style="cursor: pointer;"></i>
+                                </th>
+                                <th>
+                                    end date
+                                    <i class="fas fa-arrow-up order" id="end_at-up" name="end_at-up" data-bind="click: function(){ $root.getData('end_at','1','end_at-up') }" style="cursor: pointer;"></i> 
+                                    <i class="fas fa-arrow-down order" id="end_at-down" name="end_at-down" data-bind="click: function(){ $root.getData('end_at','','end_at-down') }" style="cursor: pointer;"></i>
+                                </th>
                             </tr>
                         </thead>
                         <tbody data-bind="foreach:{data:listado, as:'item'}">
@@ -36,6 +68,35 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="ModalSendReport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Send report available courses</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                	<form action="." method="post" enctype="multipart/form-data">
+                		{% csrf_token %}
+                		<div class="form-group row">
+	                        <div class="col-sm-6 mb-3 mb-sm-0">
+	                            <input type="text" class="form-control form-control-user" id="txtEmail" 
+                                placeholder="email address" data-bind="value: myVO.email">
+	                        </div>
+                    	</div>
+                	</form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="#" data-bind="click: sendReport">Send</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock contenido %}
 
 {% block imports %}
@@ -46,7 +107,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        microcourse.consultar();
+        microcourse.getData('id','','id-down');
     });
 </script>
 

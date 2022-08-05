@@ -1,46 +1,26 @@
 ﻿var mensajeNoFound = '<div class="alert alert-warning alert-dismissable"><i class="fa fa-warning"></i>No se encontraron registros</div>';
 var mensajeInformativoBusuqeda = '<div class="alert alert-info alert-dismissable"><i class="fa fa-info pr10"></i> No se han seleccionado parametros de busqueda.</div>';
 var resultadosPorPagina = 2;
-//var path_principal='http://52.42.43.115:8000';// la ruta del servidor
-//var path_principal = 'http://localhost:8000'; // la ruta del servidor
 var path_principal = ''; // se deja vacia esta variable para poder trabajr en el local y el servidor
 var token = localStorage.getItem('token');
 var ver_div = true
 
-function mensajeExitoso(mensaje, titulo) {
-    $.confirm({
-        title: titulo || 'Confirmación',
-        content: '<h4><i class="text-success fa fa-check-circle-o fa-2x"></i> ' + mensaje + '<h4>',
-        cancelButton: 'Cerrar',
-        confirmButton: false
-    });
-    // if ( $("#nombre").length){
-    //     document.getElementById("nombre").value = null;
-    // }
-    // if ( $("#artista").length){
-    //     document.getElementById("artista").value = null;
-    // }
-    // if ( $("#caratula").length){
-    //     document.getElementById("caratula").value = null;
-    // }
-    // if ( $("#archivo").length){
-    //     document.getElementById("archivo").value = null;
-    // }
-    // if ( $("#nombreArtistico").length){
-    //     document.getElementById("nombreArtistico").value = null;
-    // }
-    // if ( $("#album").length){
-    //     document.getElementById("album").value = null;
-    // }    
+function mensajeExitoso(message, titulo) {
+    Swal.fire({
+        title: titulo || 'Application test',
+        text: message,
+        icon: 'success',
+        confirmButtonText: 'Ok'
+    }) 
 }
 
-function mensajeError(mensaje, titulo) {
-    $.confirm({
-        title: titulo || 'Error',
-        content: '<h4><i class="text-warning fa fa-exclamation-triangle fa-2x"></i> ' + mensaje + '<h4>',
-        cancelButton: 'Cerrar',
-        confirmButton: false
-    });
+function mensajeError(message, titulo) {
+    Swal.fire({
+        title: titulo || 'Application test',
+        text: message,
+        icon: 'warning',
+        confirmButtonText: 'Ok'
+    }) 
 }
 
 function mensajeInformativo(mensaje, titulo) {

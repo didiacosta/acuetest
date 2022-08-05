@@ -168,5 +168,12 @@ CORS_ALLOW_METHODS = [
     'OPTIONS'
 ]
 
-
 URL_OBJECTS = os.environ['URL_OBJECTS']
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ['EMAIL_HOST']
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_PORT = os.environ['EMAIL_PORT']
+EMAIL_USE_TLS = os.environ['EMAIL_USE_TLS']
+EMAIL_FROM = os.environ['EMAIL_FROM']
