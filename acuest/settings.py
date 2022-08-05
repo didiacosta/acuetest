@@ -33,7 +33,7 @@ SECRET_KEY = 'l&^b^yto9v*!6fm0#nj#!sej!4y6nl(+pq53*rmq8m#@%xuy!j'
 DEBUG = env('DEBUG')
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['localhost',]
+ALLOWED_HOSTS = ['localhost','acuetest-env.eba-gkptt3sc.us-west-2.elasticbeanstalk.com']
 
 # Application definition
 try:
@@ -141,6 +141,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
