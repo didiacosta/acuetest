@@ -111,10 +111,13 @@
                                 aria-labelledby="userDropdown">
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#"  data-toggle="modal">
-                                	<a href="{% url 'appuser.logout' %}">
-	                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-	                                    Logout</a>
-                                	</a>
+                                	<!-- <a href="{% url 'appuser.logout' %}"> -->
+                                        <div onclick='location.href= "../logout"'>
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            Logout
+                                        </div>
+                                    <!-- </a> -->
+                                </a>
                             </div>
                         </li>
 

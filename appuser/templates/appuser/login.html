@@ -1,15 +1,15 @@
 {% extends 'mplogin.html' %}
-{% block title %}Ingresar{% endblock %}
+{% block title %}Login{% endblock %}
 {% block contenido %}
 <div class="text-center">
-     <h1 class="h4 text-gray-900 mb-4">Login</h1>
+     <h1 class="h4 text-gray-900 mb-4">Login my application</h1>
 </div>
 <form class="user" method="post" action="." enctype="multipart/form-data" id="formlogin">
     {% csrf_token %}
     <div class="form-group">
         <input type="email" class="form-control form-control-user"
             id="username" name="username" aria-describedby="emailHelp"
-            placeholder="Ingrese su direccion de correo...">
+            placeholder="Username...">
     </div>
     <div class="form-group">
         <input type="password" class="form-control form-control-user"
@@ -25,9 +25,21 @@
     </div>
     <a href="#" class="btn btn-primary btn-user btn-block" 
     onclick="document.getElementById('formlogin').submit();">
-        Ingresar
+        LOGIN
     </a>
     <hr>
 </form>
 
 {% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        $('#password').keyup(function (e) {
+            if (e.keyCode === 13) {
+                document.getElementById('formlogin').submit();
+            }
+        });
+    });
+
+  </script>
+{% endblock scripts %}

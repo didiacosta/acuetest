@@ -16,8 +16,17 @@ class MicrocourseViewSet(viewsets.ModelViewSet):
 	serializer_class = ''
 
 	def getData(self):
-		f = open(f'{settings.STATICFILES_DIRS[0]}/ACUE-microcourselist.json')
-		return json.load(f)
+		url = settings.URL_OBJECTS
+		r = requests.get(url = url, headers={
+			'Connection':'keep-alive',
+			'Accept':'*/*',
+			"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53"})
+		if r.status_code == 200:
+			response = r.json()
+			return response
+		else:
+			f = open(f'{settings.STATICFILES_DIRS[0]}/ACUE-microcourselist.json')
+			return json.load(f)
 	
 	def startAt(self,x):
 		return x['start_at'] or datetime.min
@@ -96,14 +105,14 @@ class MicrocourseViewSet(viewsets.ModelViewSet):
 						content = content + f'<td>{obj["name"]}</td>'
 						content = content + f'<td>{obj["course_code"]}</td>'
 						content = content + f'<td>{obj["workflow_state"]}</td>'
-						content = content + f'<td>{obj["start_at"]}</td>'
-						content = content + f'<td>{obj["end_at"]}</td>'
+						start_at = '' if obj["start_at"] == None else obj["start_at"]
+						content = content + f'<td>{start_at}</td>'
+						end_at = '' if obj["end_at"] == None else obj["end_at"]
+						content = content + f'<td>{end_at}</td>'
 						content = content + '</tr>'
 				content = content + '</table>'
-				#breakpoint()
 				ObjEmail = EmailMessage('Report Available courses', content, to=[email])
 				ObjEmail.content_subtype = "html"
-				#ObjEmail.send(fail_silently=False)
 
 				sendEmail = threading.Thread(target = ObjEmail.send)
 				sendEmail.start()
@@ -133,9 +142,3 @@ class MicrocourseViewSet(viewsets.ModelViewSet):
 					'data': []
 				},
 				status = status.HTTP_400_BAD_REQUEST)
-
-	# def mySendMail(self, subject, content, sender, recipients):
-	# 	email = EmailMessage(subject, content, sender, recipients)
-	# 	email.content_subtype = "html"
-	# 	res = email.send(fail_silently=False)
-	# 	return res
